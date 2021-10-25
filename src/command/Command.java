@@ -22,3 +22,8 @@ public class Command {
     }
     
 }
+//задание
+//Постройте модель для графического изображения.
+//Модель позволит вам убрать из функции панели
+//public void update(Observable o, Object arg)
+//обращение к reflaction(getClass).

@@ -40,33 +40,41 @@ public class MyPanel extends JPanel implements Observer {
         JButton light = new JButton("Light");
         JButton on = new JButton("on");
         JButton off = new JButton("off");
-        //     JLabel topLabel = new JLabel("Top");
-        blindEntity = new JLabel("blinds0");
-        lightEntity = new JLabel("light");
-        // blindEntity.setForeground(Color.GREEN);
-        blindEntity.setBackground(Color.GREEN);
+        blindEntity = new JLabel("on");
+        lightEntity = new JLabel("off");
+        blindEntity.setBackground(Color.BLACK);
+        blindEntity.setHorizontalAlignment(JLabel.CENTER);
         blindEntity.setOpaque(true);
         lightEntity.setBackground(Color.YELLOW);
+        lightEntity.setHorizontalAlignment(JLabel.CENTER);
+        light.setEnabled(false);
         lightEntity.setOpaque(true);
+        
         GridLayout myLayout = new GridLayout(0, 2);
-
         setLayout(myLayout);
 
-        add(blind);add(blindEntity);
-        add(light);add(lightEntity);
-        add(on);   add(off);
-        
-        
+        add(blind);
+        add(blindEntity);
+        add(light);
+        add(lightEntity);
+        add(on);
+        add(off);
+
         blind.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.changeEntityBlind();
+                blind.setEnabled(false);
+                light.setEnabled(true);
             }
         });
         light.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 c.changeEntityLight();
+                blind.setEnabled(true);
+                light.setEnabled(false);
+
             }
         });
         on.addActionListener(new ActionListener() {
@@ -94,10 +102,12 @@ public class MyPanel extends JPanel implements Observer {
         if (com.getClass().getName() == "model.Blinds") {
             Blinds b = (Blinds) com;
             blindEntity.setBackground(b.isOn_off() ? Color.BLACK : Color.WHITE);
+            blindEntity.setText(b.isOn_off() ? "on" : "off");
 
         } else {
             Light b = (Light) com;
             lightEntity.setBackground(b.isOn_off() ? Color.YELLOW : Color.gray);
+            lightEntity.setText(b.isOn_off() ? "on" : "off");
         }
 
         repaint();
