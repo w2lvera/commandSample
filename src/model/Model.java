@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Observable;
+import model.grafModel.GrafModel;
 
 
 
@@ -13,37 +14,40 @@ import java.util.Observable;
  *
  * @author Netbeans
  */
-public class Model extends Observable{
+public class Model {
     Light light;
     Blinds blinds;
     Command activeEntity;
-    int n;
-   // boolean button[];
+    GrafModel gm;
+    
 
-    public Model(int n) {
+    public Model(GrafModel gm) {
        blinds = new Blinds(); 
        light = new Light();
        activeEntity  = light;
+       this.gm = gm;
        
     }
     public void execute(){
         activeEntity.execute();
-        setChanged();
-        notifyObservers(activeEntity);
+        gm.execute();
+       
         
     }
     public void unexecute(){
         activeEntity.unexecute();
-        setChanged();
-        notifyObservers(activeEntity);
+        gm.unexecute();
+      
     }
 
     public void setActiveEntityLight() {
         activeEntity = light;
+        gm.setLableLight();
     }
 
     public void setActiveEntityBlind() {
         activeEntity = blinds;
+        gm.setLableBlind();
     }
    
 }

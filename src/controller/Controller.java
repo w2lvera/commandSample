@@ -8,6 +8,7 @@ package controller;
 import model.Blinds;
 import model.Light;
 import model.Model;
+import model.grafModel.GrafModel;
 import view.MyFrame;
 import view.MyPanel;
 
@@ -20,13 +21,16 @@ public class Controller {
     MyFrame frame;
     MyPanel panel;
     Model model;
+    GrafModel gm;
 
     public Controller() {
 
         panel = new MyPanel(this);
+        gm = new GrafModel(panel.getLightEntity(),panel.getBlindEntity());
+        gm.addObserver(panel);
         frame = new MyFrame(panel);
-        model = new Model(3);
-        model.addObserver(panel);
+        model = new Model(gm);
+       
     }
 
     

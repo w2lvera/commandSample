@@ -92,23 +92,31 @@ public class MyPanel extends JPanel implements Observer {
 
     }
 
+    public JLabel getLightEntity() {
+        return lightEntity;
+    }
+
+    public JLabel getBlindEntity() {
+        return blindEntity;
+    }
+
     public void setC(Controller c) {
         this.c = c;
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        Command com = (Command) arg;
-        if (com.getClass().getName() == "model.Blinds") {
-            Blinds b = (Blinds) com;
-            blindEntity.setBackground(b.isOn_off() ? Color.BLACK : Color.WHITE);
-            blindEntity.setText(b.isOn_off() ? "on" : "off");
-
-        } else {
-            Light b = (Light) com;
-            lightEntity.setBackground(b.isOn_off() ? Color.YELLOW : Color.gray);
-            lightEntity.setText(b.isOn_off() ? "on" : "off");
-        }
+//        Command com = (Command) arg;
+//        if (com.getClass().getName() == "model.Blinds") {
+//            Blinds b = (Blinds) com;
+//            blindEntity.setBackground(b.isOn_off() ? Color.BLACK : Color.WHITE);
+//            blindEntity.setText(b.isOn_off() ? "on" : "off");
+//
+//        } else {
+//            Light b = (Light) com;
+//            lightEntity.setBackground(b.isOn_off() ? Color.YELLOW : Color.gray);
+//            lightEntity.setText(b.isOn_off() ? "on" : "off");
+//        }
 
         repaint();
     }
